@@ -1,0 +1,12 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+<h1>{{ object.tittle }}</h1>
+<p>{{ object.description }}</p>
+<p>Assigned User: {{ object.assigned_user }}</p>
+<p>Done: {{ object.done }}</p>
+<p>Created By: {{ object.created_by }}</p>
+<p>Updated By: {{ object.updated_by }}</p>
+<p>Priority: {{ object.priority }}</p>
+<p>Created: {{ object.created|date }}</p>
+<p>Updated: {{ object.updated|date }}</p>
+<a href="{% url 'todo_list' %}">Volver</a>

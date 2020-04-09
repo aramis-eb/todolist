@@ -1,0 +1,26 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+<h2>Todo List</h2>
+
+<ul class="list-group">
+{% for todo in object_list %}
+    <li class="list-group-item list-group-item-action">
+    <h4>{{ todo.id }}:  {{ todo.tittle }} - {{ todo.done }}</h4> <br>
+    <a href="{% url 'todo_update' todo.id %}"><button type="button" class="btn btn-info">Edit</button></a>
+    <a href="{% url 'todo_delete' todo.id%}"><button type="button" class="btn btn-outline-danger">X</button></a>
+    <a href="{% url 'todo_asing' todo.id%}"><button type="button" class="btn btn-outline-success">Asing</button></a>
+
+    </li>
+{% empty %}
+    <li>No todo yet.</li>
+{% endfor %}
+
+</ul>
+
+{% include "_pagination.html" %}
+<a href="{% url 'todo_create' %}">
+<button type="button" class="btn btn-success">Crear</button>
+</a>
+<a href ="{% url 'todo_logout' %}"> 
+<span class="badge badge-danger">Logout</span>
+</a>
