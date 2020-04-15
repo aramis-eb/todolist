@@ -5,9 +5,10 @@ from .views import (
     TodoDelete,
     TodoEdit,
     TodoReasing,
-    TodoDetailView
+    TodoDetailView,
     )
 from django.contrib.auth.views import LoginView, LogoutView
+
 
 urlpatterns = [
     path('login', LoginView.as_view(), name='todo_login'),

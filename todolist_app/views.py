@@ -16,14 +16,24 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 
 
-class TodoListView(PaginationMixin, LoginRequiredMixin, ListView):
+class FilterTodoPermission:
+    def get_queryset(self):
+        return Todo.objects.filter(assigned_user=self.request.user)
+
+
+class TodoListView(
+    LoginRequiredMixin,
+    PaginationMixin,
+    FilterTodoPermission,
+    ListView
+        ):
     paginate_by = 3
 
     def get_queryset(self):
         return Todo.objects.filter(assigned_user=self.request.user)
 
 
-class TodoCreate(LoginRequiredMixin, CreateView):
+class TodoCreate(LoginRequiredMixin, FilterTodoPermission, CreateView):
     model = Todo
     fields = [
         'tittle', 'description', 'done', 'priority'
@@ -40,7 +50,7 @@ class TodoCreate(LoginRequiredMixin, CreateView):
         return reverse('todo_detail', args=(self.object.id,))
 
 
-class TodoEdit(LoginRequiredMixin, UpdateView):
+class TodoEdit(LoginRequiredMixin, FilterTodoPermission, UpdateView):
     model = Todo
     fields = [
         'tittle', 'description', 'done', 'priority'
@@ -51,49 +61,30 @@ class TodoEdit(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('todo_detail', args=(self.object.id,))
 
-    def get_object(self):
-        todo = super().get_object().assigned_user.id
-        if todo != self.request.user.id: 
-            raise PermissionDenied
-        else:
-            return super().get_object()
+    # Cambiado Por TodoPermission
+    # def get_object(self):
+    #     # GetQuerySet
+    #     todo = super().get_object().assigned_user.id
+    #     if todo != self.request.user.id:
+    #         raise FilterTodoPermission
+    #     else:
+    #         return super().get_object()
 
 
-class TodoDelete(LoginRequiredMixin, DeleteView):
+class TodoDelete(LoginRequiredMixin, FilterTodoPermission, DeleteView):
     model = Todo
     success_url = reverse_lazy('todo_list')
 
-    def get_object(self):
-        todo = super().get_object().assigned_user.id
-        if todo != self.request.user.id:
-            raise PermissionDenied
-        else:
-            return super().get_object()
 
-
-class TodoReasing(LoginRequiredMixin, UpdateView):
+class TodoReasing(LoginRequiredMixin, FilterTodoPermission, UpdateView):
     model = Todo
     fields = ['assigned_user']
     success_url = reverse_lazy('todo_list')
 
-    def get_object(self):
-        todo = super().get_object().assigned_user.id
-        if todo != self.request.user.id:
-            raise PermissionDenied
-        else:
-            return super().get_object()
 
-
-class TodoDetailView(LoginRequiredMixin, DetailView):
+class TodoDetailView(LoginRequiredMixin, FilterTodoPermission, DetailView):
     model = Todo
     success_url = reverse_lazy('todo_list')
-
-    def get_object(self):
-        todo = super().get_object().assigned_user.id
-        if todo != self.request.user.id:
-            raise PermissionDenied
-        else:
-            return super().get_object()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

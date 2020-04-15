@@ -21,16 +21,23 @@ class TestTodoList(TestCase):
         user = User.objects.create(username='aramis')
         user.set_password('agustin20')
         user.save()
-        response = client.post('/login', {
-            'username': 'aramis', 'password': 'passwordinvalid'
-            }, follow=True)
+        response = client.post(
+            '/login',
+            {
+                'username': 'aramis',
+                'password': 'passwordinvalid'
+            },
+            follow=True,
+        )
         self.assertEquals(response.status_code, 200)
 
     def test_todo_list_incorrect_login(self):
         c = Client()
-        result = c.login(
-            username='aramis', password='invalidPassword'
-            )
+        result = c.login
+        (
+            username='aramis',
+            password='invalidPassword'
+        )
         self.assertFalse(result)
 
     def test_todo_list_user_logged(self):
