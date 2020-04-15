@@ -33,8 +33,7 @@ class TestTodoList(TestCase):
 
     def test_todo_list_incorrect_login(self):
         c = Client()
-        result = c.login
-        (
+        result = c.login(
             username='aramis',
             password='invalidPassword'
         )
