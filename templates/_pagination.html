@@ -1,7 +1,8 @@
 {% load i18n %}
 {% load bootstrap4 %}
-{% bootstrap_css %}
-<div class="pagination justify-content-center">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'todolist/css/pagination.css' %}">
+<div class="pagination ">
     {% if page_obj.has_previous %}
         <a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo; {% trans "previous" %}</a>
     {% else %}

@@ -1,22 +1,12 @@
 {% load bootstrap4 %}
-{% bootstrap_css %}
-
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">Sign In</h5>
-            <form class="form-signin" method="post">
-                {% csrf_token %}
-                    {{ form.as_p }}
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-              <hr class="my-4">
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'todolist/css/login/login.css' %}">
+<h1>Login</h1>
+<form class="form-signin" method="post">
+  <div class="imgcontainer">
+    <img src="{% static 'todolist/img/avatar.png' %}" class="avatar">
   </div>
-</body>
+  {% csrf_token %}
+      {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>

@@ -10,7 +10,7 @@ from django.views.generic.edit import (
     DeleteView
     )
 from django.views.generic.detail import DetailView
-from .models import Todo
+from .models import Todo, Priority
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
@@ -27,7 +27,7 @@ class TodoListView(
     FilterTodoPermission,
     ListView
         ):
-    paginate_by = 3
+    paginate_by = 5
 
     def get_queryset(self):
         return Todo.objects.filter(assigned_user=self.request.user)
