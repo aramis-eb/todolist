@@ -75,7 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'todolist.wsgi.application'
 
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_prod')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
