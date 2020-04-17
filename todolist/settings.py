@@ -25,7 +25,9 @@ SECRET_KEY = 'tv5p(x(gull1bmgnv4)e8vvk(f4f9@z^w5!10@z9(+#2wa-l_k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'todo-list-app-ar.herokuapp.com'
+    ]
 
 
 # Application definition
