@@ -3,18 +3,10 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'todolist/css/todo_list/todo_list.css' %}">
 <h1>To-Do list</h1>
-<form>
-        <div class="form-group col-md-1">
-            <label for="priority">Priority</label>
-            <select id="priority" class="form-control">
-            <option>...</option>
-            <option>Low</option>
-            <option>Medium</option>
-            <option>Hight</option>
-            </select>
-        </div>
-    </div>
-</from>
+<form method="GET">
+    <a class="mr-4">{{ filter.form}}</a>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -25,7 +17,7 @@
           <th scope="col">Actions</th>
         </tr>
       </thead>
-{% for todo in object_list %}
+{% for todo in filter.qs %}
     <tbody> 
         <tr>
             {% if todo.done %}

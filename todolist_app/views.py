@@ -14,6 +14,7 @@ from .models import Todo, Priority
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from .filters import TodoFilter
 
 
 class FilterTodoPermission:
@@ -31,6 +32,14 @@ class TodoListView(
 
     def get_queryset(self):
         return Todo.objects.filter(assigned_user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = TodoFilter(
+            self.request.GET,
+            queryset=self.get_queryset()
+            )
+        return context
 
 
 class TodoCreate(LoginRequiredMixin, FilterTodoPermission, CreateView):
