@@ -18,8 +18,6 @@ DATABASES = {
 DB_FROM_ENV = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(DB_FROM_ENV)
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_prod')
-
 INSTALLED_APPS += [  # noqa
     'whitenoise.runserver_nostatic'
 ]
@@ -30,21 +28,5 @@ MIDDLEWARE += [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-        },
-    },
-}
 
 DEBUG = False
