@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # 'tv5p(x(gull1bmgnv4)e8vvk(f4f9@z^w5!10@z9(+#2wa-l_k'
-SECRET_KEY = 'tv5p(x(gull1bmgnv4)e8vvk(f4f9@z^w5!10@z9(+#2wa-l_k'
+SECRET_KEY = get_env_variable('SECRET_KEY')
 
 # Application definition
 
