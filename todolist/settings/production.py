@@ -17,8 +17,12 @@ DATABASES = {
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_prod')
 
+INSTALLED_APPS += [  # noqa
+    'whitenoise.runserver_nostatic'
+]
+
 MIDDLEWARE += [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
